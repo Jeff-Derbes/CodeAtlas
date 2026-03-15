@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CodeAtlas
 
-## Getting Started
+CodeAtlas is a minimal local-first workspace for indexing a code repository and asking questions about it. This initial setup focuses on a clean Next.js foundation, a simple placeholder UI, and small library stubs for the future indexing and retrieval pipeline.
 
-First, run the development server:
+## Stack
+
+- Next.js with the App Router
+- TypeScript
+- Tailwind CSS
+
+## Project Layout
+
+```text
+src/
+  app/
+  components/
+  lib/
+    answering/
+    chunking/
+    config/
+    indexing/
+    llm/
+    repo/
+    retrieval/
+    types/
+data/
+  indexes/
+```
+
+## Local Setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Copy the example environment file:
+
+```powershell
+Copy-Item .env.example .env.local
+```
+
+3. Update the LM Studio values in `.env.local` if needed.
+
+4. Start the dev server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## LM Studio Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `LM_STUDIO_BASE_URL`: OpenAI-compatible LM Studio base URL. Default: `http://127.0.0.1:1234/v1`
+- `LM_STUDIO_MODEL`: Model identifier to use for future answer generation
+- `LM_STUDIO_API_KEY`: Optional API key value if your local setup expects one
 
-## Learn More
+## Current Status
 
-To learn more about Next.js, take a look at the following resources:
+Implemented:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- repository scaffold with App Router and Tailwind
+- placeholder homepage for repo indexing and Q&A
+- library folders and shared types
+- LM Studio config helper and example environment file
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Stubbed for later:
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- repository scanning
+- chunking
+- index persistence
+- retrieval
+- LLM calls
+- answer generation with real citations
