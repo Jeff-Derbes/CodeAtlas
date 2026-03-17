@@ -14,3 +14,4 @@ export function createRepoSelection(rootPath: string): RepoSelection {
 // Export the scanning functionality
 export { scanRepo, scanRepoPaths } from "./scanRepo";
 export type { FileMetadata } from "./scanRepo";
+export * from "./readFile";
