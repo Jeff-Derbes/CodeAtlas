@@ -4,6 +4,9 @@ import { readFiles } from "@/lib/repo/readFile";
 import { chunkFiles } from "@/lib/chunking/chunker";
 import type { FileData } from "@/lib/types/fileData";
 
+export { loadIndex, saveIndex } from "./indexStore";
+export type { SavedIndex } from "./indexStore";
+
 export async function indexRepository(repoPath: string): Promise<IndexingResult> {
   const metadata = scanRepo(repoPath);
 
