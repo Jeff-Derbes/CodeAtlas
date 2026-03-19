@@ -1,9 +1,2 @@
-import type { IndexedChunk } from "@/lib/types";
-
-export async function retrieveRelevantChunks(
-  _question: string,
-): Promise<IndexedChunk[]> {
-  void _question;
-
-  return [];
-}
+export { cosineSimilarity, retrieveRelevantChunks } from "./retrieveRelevantChunks";
+export type { RetrievedChunk } from "./retrieveRelevantChunks";
