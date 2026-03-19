@@ -1,5 +1,5 @@
 import { HomeShell } from "@/components/home-shell";
 
 export default function Home() {
-  return <HomeShell />;
+  return <HomeShell defaultRepoPath={process.cwd()} />;
 }

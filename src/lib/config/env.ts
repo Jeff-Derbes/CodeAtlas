@@ -7,11 +7,14 @@ export function getLmStudioConfig(): LmStudioConfig {
   const baseUrl =
     process.env.LM_STUDIO_BASE_URL?.trim() || DEFAULT_LM_STUDIO_BASE_URL;
   const model = process.env.LM_STUDIO_MODEL?.trim() || DEFAULT_LM_STUDIO_MODEL;
+  const embeddingModel =
+    process.env.LM_STUDIO_EMBEDDING_MODEL?.trim() || model;
   const apiKey = process.env.LM_STUDIO_API_KEY?.trim() || undefined;
 
   return {
     baseUrl,
     model,
+    embeddingModel,
     apiKey,
   };
 }

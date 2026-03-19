@@ -1,6 +1,7 @@
 export interface LmStudioConfig {
   baseUrl: string;
   model: string;
+  embeddingModel: string;
   apiKey?: string;
 }
 
@@ -15,20 +16,35 @@ export interface IndexedChunk {
   score?: number;
 }
 
+export interface AnswerSourceChunk {
+  id?: string;
+  relativePath: string;
+  startLine: number;
+  endLine: number;
+  content: string;
+  score?: number;
+}
+
 export interface Citation {
-  id: string;
-  path: string;
+  sourceId: number;
+  relativePath: string;
+  startLine: number;
+  endLine: number;
   snippet: string;
+  score?: number;
 }
 
 export interface IndexingResult {
-  status: "stubbed";
+  status: "indexed" | "error";
+  repoPath: string;
+  indexPath: string;
   indexedChunkCount: number;
+  indexedFileCount: number;
   message: string;
 }
 
 export interface AnswerResult {
-  status: "stubbed";
+  status: "answered" | "no_context" | "error";
   answer: string;
   citations: Citation[];
 }
