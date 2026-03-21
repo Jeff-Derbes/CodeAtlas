@@ -44,13 +44,7 @@ export async function retrieveRelevantChunks(
     return [];
   }
 
-  let questionEmbedding: number[];
-
-  try {
-    questionEmbedding = await embedText(question);
-  } catch {
-    return [];
-  }
+  const questionEmbedding = await embedText(question);
 
   if (!isValidEmbedding(questionEmbedding)) {
     return [];

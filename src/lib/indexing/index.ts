@@ -27,22 +27,23 @@ export async function indexRepository(
   repoPath: string,
   options: IndexRepositoryOptions = {},
 ): Promise<IndexingResult> {
-  const metadata = scanRepo(repoPath);
+  const resolvedPath = path.resolve(repoPath);
+  const metadata = scanRepo(resolvedPath);
   const filePaths = metadata.map((m) => m.absolutePath);
-  const fileDatas = await readFiles(filePaths, repoPath);
+  const fileDatas = await readFiles(filePaths, resolvedPath);
   const chunks = chunkFiles(fileDatas);
   const embedText = options.embedText ?? defaultEmbedText;
   const embeddedChunks = await embedChunks(chunks, embedText);
   const indexPath = options.indexPath ?? getDefaultIndexPath();
 
-  await saveIndex(indexPath, repoPath, embeddedChunks);
+  await saveIndex(indexPath, resolvedPath, embeddedChunks);
 
   return {
     status: "indexed",
-    repoPath,
+    repoPath: resolvedPath,
     indexPath,
     indexedChunkCount: embeddedChunks.length,
     indexedFileCount: fileDatas.filter((file) => file.content && !file.error).length,
-    message: `Indexed ${embeddedChunks.length} chunk(s) from ${repoPath}.`,
+    message: `Indexed ${embeddedChunks.length} chunk(s) from ${resolvedPath}.`,
   };
 }
