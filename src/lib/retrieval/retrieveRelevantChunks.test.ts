@@ -87,14 +87,14 @@ describe("retrieveRelevantChunks", () => {
     expect(result).toEqual([]);
   });
 
-  it("returns an empty array when question embedding fails", async () => {
-    const result = await retrieveRelevantChunks(
-      "question",
-      sampleChunks,
-      async () => Promise.reject(new Error("embedding failed")),
-    );
-
-    expect(result).toEqual([]);
+  it("throws when question embedding fails", async () => {
+    await expect(
+      retrieveRelevantChunks(
+        "question",
+        sampleChunks,
+        async () => Promise.reject(new Error("embedding failed")),
+      ),
+    ).rejects.toThrow("embedding failed");
   });
 
   it("skips chunks with invalid embeddings", async () => {
